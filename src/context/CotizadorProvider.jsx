@@ -4,6 +4,7 @@ const CotizadorContext = createContext()
 
 const CotizadorProvider = ({children}) => {
 
+  const [ error, setError ] = useState('')
   const [ datos, setDatos ] = useState({
     marca: '',
     year: '',
@@ -17,11 +18,17 @@ const CotizadorProvider = ({children}) => {
     })
   }
 
+  const handleChangeError = e => {
+    setError(e)
+  }
+
   return (
     <CotizadorContext.Provider
       value={{
         datos,
-        handleChangeDatos
+        handleChangeDatos,
+        error,
+        handleChangeError
       }}
     >
       {children}
