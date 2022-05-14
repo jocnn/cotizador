@@ -1,13 +1,13 @@
-import { Fragment, useContext } from "react";
-import CotizadorProvider from "../context/CotizadorProvider";
+import { Fragment } from "react";
+import useCotizador from "../hooks/useCotizador";
 
 import { MARCAS, YEARS, PLANES } from "../constants/Constants";
 
 const Formulario = () => {
 
-  const { modal, cambiarModal } = useContext(CotizadorProvider)
+  const { datos, handleChangeDatos } = useCotizador()
 
-  console.log(modal)
+  const { marca, year } = datos
 
 	return (
 		<>
@@ -20,6 +20,8 @@ const Formulario = () => {
 						Marca
 					</label>
 					<select
+            onChange={ e => handleChangeDatos(e) }
+            value={marca}
 						name="marca"
 						id="marca"
 						className="w-full p-3 bg-white border border-gray-200">
@@ -44,25 +46,27 @@ const Formulario = () => {
         <div className="my-5">
 					<label
 						className="block mb-3 font-bold text-gray-400 uppercase"
-						htmlFor="anho">
+						htmlFor="year">
 						Año
 					</label>
 					<select
-						name="anho"
-						id="anho"
+            onChange={ e => handleChangeDatos(e) }
+            value={year}
+						name="year"
+						id="year"
 						className="w-full p-3 bg-white border border-gray-200">
 						<option 
               className="text-center" 
               value=""
             >-- Seleccione el año --</option>
             {
-              YEARS.map( year => (
+              YEARS.map( anhio => (
                 <option
-                  key={year}
-                  value={year}
+                  key={anhio}
+                  value={anhio}
                   className="text-center"
                 >
-                  {year}
+                  {anhio}
                 </option>
               ))
             }
@@ -83,6 +87,7 @@ const Formulario = () => {
                 >
                   <label htmlFor="plan">{plan.nombre}</label>
                   <input
+                    onChange={ e => handleChangeDatos(e) }
                     type="radio" 
                     name="plan"
                     value={plan.id}
