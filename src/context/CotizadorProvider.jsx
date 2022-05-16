@@ -1,10 +1,11 @@
 import { createContext, useState } from "react";
-import { getDifferenceYear, caculateBrand } from "../helpers";
+import { getDifferenceYear, caculateBrand, selectingPlan, formatMoney } from "../helpers";
 
 const CotizadorContext = createContext()
 
 const CotizadorProvider = ({children}) => {
 
+  const [ resultado, setResultado ] = useState(0)
   const [ error, setError ] = useState('')
   const [ datos, setDatos ] = useState({
     marca: '',
@@ -43,6 +44,11 @@ const CotizadorProvider = ({children}) => {
     result *= caculateBrand(datos.marca)
     console.info(result)
 
+    result *= selectingPlan(datos.plan)
+    result = formatMoney(result)
+    console.info(result)
+    setResultado(result)    
+
   }
 
   return (
@@ -52,7 +58,8 @@ const CotizadorProvider = ({children}) => {
         handleChangeDatos,
         error,
         handleChangeError,
-        handleCotizando
+        handleCotizando,
+        resultado
       }}
     >
       {children}
