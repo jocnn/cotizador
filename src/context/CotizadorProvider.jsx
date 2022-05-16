@@ -5,6 +5,7 @@ const CotizadorContext = createContext()
 
 const CotizadorProvider = ({children}) => {
 
+  const [ cargando, setCargando ] = useState(false)
   const [ resultado, setResultado ] = useState(0)
   const [ error, setError ] = useState('')
   const [ datos, setDatos ] = useState({
@@ -26,6 +27,7 @@ const CotizadorProvider = ({children}) => {
 
   const handleCotizando = () => {
     //console.info('cotizando...')
+    setCargando(true)
 
     console.info(datos)
     
@@ -47,7 +49,11 @@ const CotizadorProvider = ({children}) => {
     result *= selectingPlan(datos.plan)
     result = formatMoney(result)
     console.info(result)
-    setResultado(result)    
+
+    setTimeout(() => {
+      setResultado(result)    
+      setCargando(false)
+    }, 3000);
 
   }
 
@@ -59,7 +65,8 @@ const CotizadorProvider = ({children}) => {
         error,
         handleChangeError,
         handleCotizando,
-        resultado
+        resultado,
+        cargando
       }}
     >
       {children}
