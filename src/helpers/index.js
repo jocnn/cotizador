@@ -22,3 +22,14 @@ export function caculateBrand(brand) {
   }
   return increment
 }
+
+export function selectingPlan(plan) {
+  return plan === "1" ? 1.2 : 1.5
+}
+
+export function formatMoney(amount) {
+  return amount.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  })
+}
