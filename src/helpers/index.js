@@ -1,13 +1,13 @@
 // diferencia de año
 export function getDifferenceYear(year) {
-  return new Date().getFullYear - year
+  return new Date().getFullYear() - year
 }
 
 // americano 15%, europeo 30% y asiatico 5%
 export function caculateBrand(brand) {
   let increment
 
-  switch (brand.id) {
+  switch (brand) {
     case "1":
       increment = 1.3
       break
