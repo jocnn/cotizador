@@ -1,12 +1,12 @@
 import { Fragment } from "react";
 import useCotizador from "../hooks/useCotizador";
 
-import { MARCAS, YEARS, PLANES } from "../constants/Constants";
+import { MARCAS, YEARS, PLANES } from "../constants";
 import Error from "./Error";
 
 const Formulario = () => {
 
-  const { datos, handleChangeDatos, error, handleChangeError } = useCotizador()
+  const { datos, handleChangeDatos, error, handleChangeError, handleCotizando } = useCotizador()
 
   const { marca, year } = datos
 
@@ -22,6 +22,7 @@ const Formulario = () => {
       
       return
     }
+    handleCotizando()
   }
 
 	return (
